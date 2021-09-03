@@ -360,25 +360,13 @@ export class Rnd extends React.PureComponent<Props, State> {
   onDrag(e: RndDragEvent, data: DraggableData) {
     if (!this.props.onDrag) return;
     const { left, top } = this.offsetFromParent;
-    if (!this.props.dragAxis || this.props.dragAxis === "both" || this.props.dragAxis === "none") {
-      return this.props.onDrag(e, { ...data, x: data.x + left, y: data.y + top });
-    } else if (this.props.dragAxis === "x") {
-      return this.props.onDrag(e, { ...data, x: data.x + left, y: this.originalPosition.y + top, deltaY: 0 });
-    } else if (this.props.dragAxis === "y") {
-      return this.props.onDrag(e, { ...data, x: this.originalPosition.x + left, y: data.y + top, deltaX: 0 });
-    }
+    return this.props.onDrag(e, { ...data, x: data.x + left, y: data.y + top });
   }
 
   onDragStop(e: RndDragEvent, data: DraggableData) {
     if (!this.props.onDragStop) return;
     const { left, top } = this.offsetFromParent;
-    if (!this.props.dragAxis || this.props.dragAxis === "both" || this.props.dragAxis === "none") {
-      return this.props.onDragStop(e, { ...data, x: data.x + left, y: data.y + top });
-    } else if (this.props.dragAxis === "x") {
-      return this.props.onDragStop(e, { ...data, x: data.x + left, y: this.originalPosition.y + top, deltaY: 0 });
-    } else if (this.props.dragAxis === "y") {
-      return this.props.onDragStop(e, { ...data, x: this.originalPosition.x + left, y: data.y + top, deltaX: 0 });
-    }
+    return this.props.onDragStop(e, { ...data, x: data.x + left, y: data.y + top });
   }
 
   onResizeStart(
